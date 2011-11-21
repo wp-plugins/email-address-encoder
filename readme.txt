@@ -9,9 +9,10 @@ A lightweight plugin to protect plain email addresses from email-harvesting robo
 
 == Description ==
 
-A lightweight plugin to protect plain email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
+A lightweight plugin to protect plain email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities. Has effect on the content of posts, pages, comments and text widgets. No UI, no shortcode, no JavaScript — just simple spam protection.
 
-Has effect on the content of posts, pages, comments and text widgets. No UI, no shortcode, no JavaScript — just simple spam protection.
+
+== Usage ==
 
 To manually encode an single email address use the `eae_encode_str()` function: `<?php echo eae_encode_str('foobar@example.com'); ?>`
 
