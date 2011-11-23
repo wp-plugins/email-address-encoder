@@ -5,11 +5,11 @@ Requires at least: 2.0
 Tested up to: 3.3
 Stable tag: 1.0.1
 
-A lightweight plugin to protect plain email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
+A lightweight plugin to protect email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
 
 == Description ==
 
-A lightweight plugin to protect plain email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities. Has effect on the posts, pages, comments, excerpts and text widgets. No UI, no shortcode, no JavaScript — just simple spam protection.
+A lightweight plugin to protect plain email addresses and mailto links from email-harvesting robots by encoding them into decimal and hexadecimal entities. Has effect on the posts, pages, comments, excerpts and text widgets. No UI, no shortcode, no JavaScript — just simple spam protection.
 
 
 == Usage ==
