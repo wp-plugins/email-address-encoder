@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Email Address Encoder
-Plugin URI: http://tillkruess.com/projects/email-encoder/
+Plugin URI: http://wordpress.org/extend/plugins/email-address-encoder/
 Description: A lightweight plugin to protect plain email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
-Version: 1.0
+Version: 1.0.1
 Author: Till Krüss
 Author URI: http://tillkruess.com/
 License: GPLv3
@@ -33,7 +33,7 @@ License: GPLv3
  * Register filters to encode exposed email addresses in
  * posts, pages, comments & widgets.
  */
-foreach (array('the_content', 'widget_text', 'comment_text') as $filter) {
+foreach (array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'comment_excerpt') as $filter) {
 	add_filter($filter, 'eae_encode_emails', 1000);
 }
 
