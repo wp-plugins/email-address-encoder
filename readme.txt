@@ -3,7 +3,7 @@ Contributors: tillkruess
 Tags: antispam, anti spam, spam, email, e-mail, mail, spider, crawler, harvester, robots, spambot, block, obfuscate, obfuscation, encode, encoder, encoding, encrypt, encryption, protect, protection
 Requires at least: 2.0
 Tested up to: 3.3
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 
 A lightweight plugin to protect email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
 
@@ -18,6 +18,8 @@ To manually encode an single email address use the `eae_encode_str()` function: 
 
 To manually encode all email addresses in a string pass it through the `eae_encode_emails()` function: `<?php echo eae_encode_emails($text); ?>`
 
+To override the regular expression used to find email addresses use the `eae_regexp` filter: `<?php add_filter('eae_regexp', $pattern); ?>`
+
 
 == Installation ==
 
@@ -30,6 +32,10 @@ For detailed installation instructions, please read the [standard installation p
 
 == Changelog ==
 
+= 1.0.2 =
+
+* Added filter to override the regular expression.
+
 = 1.0.1 =
 
 * Effects now also page, post and comment excerpts
@@ -40,6 +46,10 @@ For detailed installation instructions, please read the [standard installation p
 
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+
+Added filter to override the regular expression.
 
 = 1.0.1 =
 

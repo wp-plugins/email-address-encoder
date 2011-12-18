@@ -3,7 +3,7 @@
 Plugin Name: Email Address Encoder
 Plugin URI: http://wordpress.org/extend/plugins/email-address-encoder/
 Description: A lightweight plugin to protect email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
-Version: 1.0.1
+Version: 1.0.2
 Author: Till Krüss
 Author URI: http://tillkruess.com/
 License: GPLv3
@@ -38,9 +38,8 @@ foreach (array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'com
 }
 
 /**
- * WordPress filter callback function. Searches for plain
- * email addresses in given $string and encodes them with
- * the help of eae_encode_str().
+ * Searches for plain email addresses in given $string and
+ * encodes them with the help of eae_encode_str().
  * 
  * Regular expression is based on based on John Gruber's Markdown.
  * http://daringfireball.net/projects/markdown/
@@ -51,8 +50,11 @@ foreach (array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'com
  * @return string $string Given text with encoded email addresses
  */
 function eae_encode_emails($string) {
-	return preg_replace_callback('
-		{
+
+	// Use the 'eae_regexp' filter to override
+	$regexp = apply_filters(
+		'eae_regexp',
+		'{
 			(?:mailto:)?
 			(?:
 				[-!#$%&*+/=?^_`.{|}~\w\x80-\xFF]+
@@ -65,13 +67,18 @@ function eae_encode_emails($string) {
 			|
 				\[[\d.a-fA-F:]+\]
 			)
-		}xi',
+		}xi'
+	);
+
+	return preg_replace_callback(
+		$regexp,
 		create_function(
             '$matches',
             'return eae_encode_str($matches[0]);'
         ),
 		$string
 	);
+
 }
 
 /**
