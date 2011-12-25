@@ -3,7 +3,7 @@ Contributors: tillkruess
 Tags: antispam, anti spam, spam, email, e-mail, mail, spider, crawler, harvester, robots, spambot, block, obfuscate, obfuscation, encode, encoder, encoding, encrypt, encryption, protect, protection
 Requires at least: 2.0
 Tested up to: 3.3
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 A lightweight plugin to protect email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
 
@@ -23,11 +23,10 @@ For detailed installation instructions, please read the [standard installation p
 
 == Frequently Asked Questions ==
 
-= What does this plugin exactly do? =
+= What does this plugin do? =
 
-Registers filters, for additional hooks, read below. checks for @sign... can be disabled...
-Why not antispambot?
-
+This plugin hooks into the WordPress filters like `the_content` and others. Additional filters can be added. On each filter a quick (disableable) search for any @-sign is performed. If an @-sign is found, a (overridable) regular expression looks for any plain text email addresses.
+Found email addresses are by default replaced with the return value of `eae_encode_str()` (changeable). This function is slightly faster than `antispambot()` and uses additional hexadecimal entities.
 
 = How can I use the `antispambot()` function instead? =
 
