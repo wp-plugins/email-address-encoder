@@ -12,15 +12,6 @@ A lightweight plugin to protect email addresses from email-harvesting robots by 
 A lightweight plugin to protect plain email addresses and mailto links from email-harvesting robots by encoding them into decimal and hexadecimal entities. Has effect on the posts, pages, comments, excerpts and text widgets. No UI, no shortcode, no JavaScript — just simple spam protection.
 
 
-== Usage ==
-
-To manually encode an single email address use the `eae_encode_str()` function: `<?php echo eae_encode_str('foobar@example.com'); ?>`
-
-To manually encode all email addresses in a string pass it through the `eae_encode_emails()` function: `<?php echo eae_encode_emails($text); ?>`
-
-To override the regular expression used to find email addresses use the `eae_regexp` filter: `<?php add_filter('eae_regexp', $pattern); ?>`
-
-
 == Installation ==
 
 For detailed installation instructions, please read the [standard installation procedure for WordPress plugins](http://codex.wordpress.org/Managing_Plugins#Installing_Plugins).
@@ -30,7 +21,38 @@ For detailed installation instructions, please read the [standard installation p
 3. Done. This plugin works without a no user interface or configuration options.
 
 
+== Frequently Asked Questions ==
+
+= What does this plugin exactly do? =
+
+Registers filters, for additional hooks, read below. checks for @sign... can be disabled...
+Why not antispambot?
+
+
+= How can I use the `antispambot()` function instead? =
+
+You specify any valid callback function with the `eae_method` filter to apply to found email addresses: `add_filter('eae_method', function() { return 'antispambot'; });`
+
+= How can I filter other parts of my site? =
+
+If it's a WordPress filter, just register the `eae_encode_emails()` function: `add_filter($tag, 'eae_encode_emails');`, otherwise just filter it directly: `eae_encode_emails($text);`. To encode a single email address use the `eae_encode_str()` function: `<?php echo eae_encode_str('user@foobar.com'); ?>`
+
+= How can I use change the regular expression pattern? =
+
+You can override [the pattern](http://fightingforalostcause.net/misc/2006/compare-email-regex.php "Comparing E-mail Address Validating Regular Expressions") with the `eae_regexp` filter: `add_filter('eae_regexp', function() { return '/pattern/'; });`
+
+= How can I disable the @-sign check? =
+
+Like this: `add_filter('eae_at_sign_check', '__return_false');`
+
+
 == Changelog ==
+
+= 1.0.3 =
+
+* Added filter to override the function called to encode
+* Improved randomness of encode-function
+* Improved speed by doing fast @-sign existence check
 
 = 1.0.2 =
 
@@ -46,6 +68,10 @@ For detailed installation instructions, please read the [standard installation p
 
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+
+Speed and "randomness" improvements.
 
 = 1.0.2 =
 

@@ -31,7 +31,7 @@ License: GPLv3
 
 /**
  * Register filters to encode exposed email addresses in
- * posts, pages, comments & widgets.
+ * posts, pages, excerpts, comments and widgets.
  */
 foreach (array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'comment_excerpt') as $filter) {
 	add_filter($filter, 'eae_encode_emails', 1000);
@@ -39,25 +39,25 @@ foreach (array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'com
 
 /**
  * Searches for plain email addresses in given $string and
- * encodes them with the help of eae_encode_str().
+ * encodes them (by default) with the help of eae_encode_str().
  * 
  * Regular expression is based on based on John Gruber's Markdown.
  * http://daringfireball.net/projects/markdown/
- * 
- * @uses eae_encode_str()
  * 
  * @param string $string Text with email addresses to encode
  * @return string $string Given text with encoded email addresses
  */
 function eae_encode_emails($string) {
 
-	// abort if $string doesn't contain any @-signs, can be
-	// disabled the 'eae_at_sign_check' filter...
+	// abort if $string doesn't contain a @-sign
 	if (apply_filters('eae_at_sign_check', true)) {
 		if (strpos($string, '@') === false) return $string;
 	}
 
-	// regexp can be overridden with the 'eae_regexp' filter
+	// override encoding function with the 'eae_method' filter
+	$method = apply_filters('eae_method', 'eae_encode_str');
+
+	// override regex pattern with the 'eae_regexp' filter
 	$regexp = apply_filters(
 		'eae_regexp',
 		'{
@@ -80,7 +80,7 @@ function eae_encode_emails($string) {
 		$regexp,
 		create_function(
             '$matches',
-            'return eae_encode_str($matches[0]);'
+            'return '.$method.'($matches[0]);'
         ),
 		$string
 	);
@@ -105,7 +105,7 @@ function eae_encode_emails($string) {
 function eae_encode_str($string) {
 
 	$chars = str_split($string);
-	$seed = (int) abs(crc32($string) / strlen($string));
+	$seed = mt_rand(0, (int) abs(crc32($string) / strlen($string)));
 
 	foreach ($chars as $key => $char) {
 
@@ -115,7 +115,7 @@ function eae_encode_str($string) {
 
 			$r = ($seed * (1 + $key)) % 100; // pseudo "random function"
 
-			if ($r > 80 && $char != '@') ; // plain character (not encoded)
+			if ($r > 60 && $char != '@') ; // plain character (not encoded), if not @-sign
 			else if ($r < 45) $chars[$key] = '&#x'.dechex($ord).';'; // hexadecimal
 			else $chars[$key] = '&#'.$ord.';'; // decimal (ascii)
 
