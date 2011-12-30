@@ -28,7 +28,7 @@ For detailed installation instructions, please read the [standard installation p
 This plugin hooks into the WordPress filters like `the_content` and others. Additional filters can be added. On each filter a quick (disableable) search for any @-sign is performed. If an @-sign is found, a (overridable) regular expression looks for any plain text email addresses.
 Found email addresses are by default replaced with the return value of `eae_encode_str()` (changeable). This function is slightly faster than `antispambot()` and uses additional hexadecimal entities.
 
-= How can I use the `antispambot()` function instead? =
+= How can I use WP's antispambot() function instead? =
 
 You specify any valid callback function with the `eae_method` filter to apply to found email addresses: `add_filter('eae_method', function() { return 'antispambot'; });`
 
