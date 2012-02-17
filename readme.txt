@@ -18,7 +18,7 @@ For detailed installation instructions, please read the [standard installation p
 
 1. Upload the `/email-address-encoder/` directory and its contents to `/wp-content/plugins/`.
 2. Login to your WordPress installation and activate the plugin through the _Plugins_ menu.
-3. Done. This plugin works without a no user interface or configuration options.
+3. Done. This plugin has no user interface or configuration options.
 
 
 == Frequently Asked Questions ==
