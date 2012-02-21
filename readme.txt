@@ -25,8 +25,11 @@ For detailed installation instructions, please read the [standard installation p
 
 = What does this plugin do? =
 
-This plugin hooks into the WordPress filters like `the_content`, `widget_text` and others (additional filters can be added). On each filter a quick (disableable) search for an @-sign is performed. If an @-sign is found, a (overridable) regular expression looks for plain text email addresses.
-Found email addresses are replaced with the return value of `eae_encode_str()` (changeable), which obfuscates the email addresses to protect it from being read by email-harvesting robots. This function is slightly faster than WP's built-in `antispambot()` and uses additional hexadecimal entities.
+This plugin hooks into the WordPress filters like `the_content`, `widget_text` and others (additional filters can be added). On each filter a quick (disableable) search for an @-sign is performed. If an @-sign is found, a (overridable) regular expression looks for plain text email addresses. Found email addresses are replaced with the return value of `eae_encode_str()` (changeable), which obfuscates the email addresses to protect it from being read by email-harvesting robots. This function is slightly faster than WP's built-in `antispambot()` and uses additional hexadecimal entities.
+
+= How can I make sure the plugin works? =
+
+You cannot use Firebug, Web Inspector or Dragonfly, because they decode decimal/hexadecimal entities into plain text. To make sure email addresses are encoded, right-click/secondary-click the page, click "View Source", "View Page Source" or "Source" and search for any plain text email addresses. 
 
 = How can I use WP's antispambot() function instead? =
 
@@ -34,7 +37,11 @@ You specify any valid callback function with the `eae_method` filter to apply to
 
 = How can I filter other parts of my site? =
 
-If it's a WordPress filter, just register the `eae_encode_emails()` function: `add_filter($tag, 'eae_encode_emails');`, otherwise just filter it directly: `eae_encode_emails($text);`. To encode a single email address use the `eae_encode_str()` function: `<?php echo eae_encode_str('user@foobar.com'); ?>`
+* If the content supports WordPress filters, register the `eae_encode_emails()` function to it: `add_filter($tag, 'eae_encode_emails');`.
+* If the content is a PHP string, run it through the `eae_encode_emails()` function: `$text = eae_encode_emails($text);`.
+* If you want to encode a single email address, use the `eae_encode_str()` function: `<?php echo eae_encode_str('user@foobar.com'); ?>`
+
+This plugin doesn't encode the entire website for performance reasons, it encodes only the content of the following WordPress filters `the_content`, `the_excerpt`, `widget_text`, `comment_text`, `comment_excerpt`.
 
 = How can I change the regular expression pattern? =
 
