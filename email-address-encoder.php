@@ -10,7 +10,7 @@ License: GPLv3
 */
 
 /**
- * Copyright 2011 Till Krüss  (www.tillkruess.com)
+ * Copyright 2012 Till Krüss  (www.tillkruess.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ License: GPLv3
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package Email Address Encoder
- * @copyright 2011 Till Krüss
+ * @copyright 2012 Till Krüss
  */
 
 /**
