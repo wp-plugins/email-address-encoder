@@ -1,11 +1,15 @@
 === Email Address Encoder ===
 Contributors: tillkruess
+Donate link: http://tillkruess.com/donations/
 Tags: antispam, anti spam, spam, email, e-mail, mail, spider, crawler, harvester, robots, spambot, block, obfuscate, obfuscation, encode, encoder, encoding, encrypt, encryption, protect, protection
 Requires at least: 2.0
 Tested up to: 3.3
 Stable tag: 1.0.3
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A lightweight plugin to protect email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
+
 
 == Description ==
 

@@ -1,12 +1,13 @@
 <?php
 /*
 Plugin Name: Email Address Encoder
-Plugin URI: http://wordpress.org/extend/plugins/email-address-encoder/
+Plugin URI: http://tillkruess.com/project/email-address-encoder/
 Description: A lightweight plugin to protect email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
 Version: 1.0.3
 Author: Till Krüss
 Author URI: http://tillkruess.com/
 License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 /**
