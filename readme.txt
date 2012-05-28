@@ -2,7 +2,7 @@
 Contributors: tillkruess
 Tags: antispam, anti spam, spam, email, e-mail, mail, spider, crawler, harvester, robots, spambot, block, obfuscate, obfuscation, encode, encoder, encoding, encrypt, encryption, protect, protection
 Requires at least: 2.0
-Tested up to: 3.3
+Tested up to: 3.4
 Stable tag: 1.0.3
 
 A lightweight plugin to protect email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
