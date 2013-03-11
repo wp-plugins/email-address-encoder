@@ -4,7 +4,7 @@ Donate link: http://tillkruess.com/donations/
 Tags: antispam, anti spam, spam, email, e-mail, mail, spider, crawler, harvester, robots, spambot, block, obfuscate, obfuscation, encode, encoder, encoding, encrypt, encryption, protect, protection
 Requires at least: 2.0
 Tested up to: 3.5
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,11 +64,11 @@ Like this: `add_filter('eae_at_sign_check', '__return_false');`
 
 = 1.0.4 =
 
-* Added constant to adjust default default filter priorty
+* Added `EAE_FILTER_PRIORITY` constant to adjust default filter priorty
 
 = 1.0.3 =
 
-* Added filter to override the function called to encode
+* Added filter to override the encoding function
 * Improved randomness of encode-function
 * Improved speed by doing fast @-sign existence check
 
@@ -86,6 +86,10 @@ Like this: `add_filter('eae_at_sign_check', '__return_false');`
 
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+
+Added constant to adjust default filter priorty.
 
 = 1.0.3 =
 
