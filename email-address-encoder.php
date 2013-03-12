@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 /**
- * Copyright 2012 Till Krüss  (www.tillkruess.com)
+ * Copyright 2013 Till Krüss  (www.tillkruess.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package Email Address Encoder
- * @copyright 2012 Till Krüss
+ * @copyright 2013 Till Krüss
  */
 
 /**
