@@ -33,15 +33,15 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 /**
  * Define plugin constants that can be overridden, generally in wp-config.php.
  */
-if (!defined('EAE_FILTER_PRIORITY'))
-	define('EAE_FILTER_PRIORITY', 1000);
+if ( !defined( 'EAE_FILTER_PRIORITY' ) )
+	define( 'EAE_FILTER_PRIORITY', 1000 );
 
 /**
  * Register filters to encode exposed email addresses in
  * posts, pages, excerpts, comments and widgets.
  */
-foreach (array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'comment_excerpt') as $filter) {
-	add_filter($filter, 'eae_encode_emails', EAE_FILTER_PRIORITY);
+foreach ( array( 'the_content', 'the_excerpt', 'widget_text', 'comment_text', 'comment_excerpt' ) as $filter ) {
+	add_filter( $filter, 'eae_encode_emails', EAE_FILTER_PRIORITY );
 }
 
 /**
@@ -54,15 +54,15 @@ foreach (array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'com
  * @param string $string Text with email addresses to encode
  * @return string $string Given text with encoded email addresses
  */
-function eae_encode_emails($string) {
+function eae_encode_emails( $string ) {
 
 	// abort if $string doesn't contain a @-sign
-	if (apply_filters('eae_at_sign_check', true)) {
-		if (strpos($string, '@') === false) return $string;
+	if ( apply_filters( 'eae_at_sign_check', true ) ) {
+		if ( strpos( $string, '@' ) === false ) return $string;
 	}
 
 	// override encoding function with the 'eae_method' filter
-	$method = apply_filters('eae_method', 'eae_encode_str');
+	$method = apply_filters( 'eae_method', 'eae_encode_str' );
 
 	// override regex pattern with the 'eae_regexp' filter
 	$regexp = apply_filters(
@@ -87,7 +87,7 @@ function eae_encode_emails($string) {
 		$regexp,
 		create_function(
             '$matches',
-            'return '.$method.'($matches[0]);'
+            'return ' . $method . '($matches[0]);'
         ),
 		$string
 	);
@@ -109,27 +109,27 @@ function eae_encode_emails($string) {
  * @param string $string Text with email addresses to encode
  * @return string $string Given text with encoded email addresses
  */
-function eae_encode_str($string) {
+function eae_encode_str( $string ) {
 
-	$chars = str_split($string);
-	$seed = mt_rand(0, (int) abs(crc32($string) / strlen($string)));
+	$chars = str_split( $string );
+	$seed = mt_rand( 0, (int) abs( crc32( $string ) / strlen( $string ) ) );
 
-	foreach ($chars as $key => $char) {
+	foreach ( $chars as $key => $char ) {
 
-		$ord = ord($char);
+		$ord = ord( $char );
 
-		if ($ord < 128) { // ignore non-ascii chars
+		if ( $ord < 128 ) { // ignore non-ascii chars
 
-			$r = ($seed * (1 + $key)) % 100; // pseudo "random function"
+			$r = ( $seed * ( 1 + $key ) ) % 100; // pseudo "random function"
 
-			if ($r > 60 && $char != '@') ; // plain character (not encoded), if not @-sign
-			else if ($r < 45) $chars[$key] = '&#x'.dechex($ord).';'; // hexadecimal
-			else $chars[$key] = '&#'.$ord.';'; // decimal (ascii)
+			if ( $r > 60 && $char != '@' ) ; // plain character (not encoded), if not @-sign
+			else if ( $r < 45 ) $chars[ $key ] = '&#x' . dechex( $ord ) . ';'; // hexadecimal
+			else $chars[ $key ] = '&#' . $ord . ';'; // decimal (ascii)
 
 		}
 
 	}
 
-	return implode('', $chars);
+	return implode( '', $chars );
 
 }
