@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: Email Address Encoder
-Plugin URI: http://tillkruess.com/project/email-address-encoder/
+Plugin URI: http://wordpress.org/plugins/email-address-encoder/
 Description: A lightweight plugin to protect email addresses from email-harvesting robots by encoding them into decimal and hexadecimal entities.
 Version: 1.0.4
 Author: Till Krüss
-Author URI: http://tillkruess.com/
+Author URI: http://till.kruss.me/
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 /**
- * Copyright 2013 Till Krüss  (www.tillkruess.com)
+ * Copyright 2014 Till Krüss  (http://till.kruss.me/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,18 +27,18 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package Email Address Encoder
- * @copyright 2013 Till Krüss
+ * @copyright 2014 Till Krüss
  */
 
 /**
- * Define plugin constants that can be overridden, generally in wp-config.php.
+ * Define default filter-priority constant, unless it has already been defined.
  */
-if ( !defined( 'EAE_FILTER_PRIORITY' ) )
+if ( ! defined( 'EAE_FILTER_PRIORITY' ) )
 	define( 'EAE_FILTER_PRIORITY', 1000 );
 
 /**
- * Register filters to encode exposed email addresses in
- * posts, pages, excerpts, comments and widgets.
+ * Register filters to encode plain email addresses in posts, pages, excerpts,
+ * comments and text widgets.
  */
 foreach ( array( 'the_content', 'the_excerpt', 'widget_text', 'comment_text', 'comment_excerpt' ) as $filter ) {
 	add_filter( $filter, 'eae_encode_emails', EAE_FILTER_PRIORITY );
@@ -47,10 +47,10 @@ foreach ( array( 'the_content', 'the_excerpt', 'widget_text', 'comment_text', 'c
 /**
  * Searches for plain email addresses in given $string and
  * encodes them (by default) with the help of eae_encode_str().
- * 
+ *
  * Regular expression is based on based on John Gruber's Markdown.
  * http://daringfireball.net/projects/markdown/
- * 
+ *
  * @param string $string Text with email addresses to encode
  * @return string $string Given text with encoded email addresses
  */
