@@ -56,9 +56,14 @@ foreach ( array( 'the_content', 'the_excerpt', 'widget_text', 'comment_text', 'c
  */
 function eae_encode_emails( $string ) {
 
-	// abort if $string doesn't contain a @-sign
-	if ( apply_filters( 'eae_at_sign_check', true ) ) {
-		if ( strpos( $string, '@' ) === false ) return $string;
+	// abort if `$string` isn't a string
+	if ( ! is_string( $string ) ) {
+		return $string;
+	}
+
+	// abort if `eae_at_sign_check` is true and `$string` doesn't contain a @-sign
+	if ( apply_filters( 'eae_at_sign_check', true ) && strpos( $string, '@' ) === false ) {
+		return $string;
 	}
 
 	// override encoding function with the 'eae_method' filter
