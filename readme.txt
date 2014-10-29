@@ -56,27 +56,27 @@ You cannot use Firebug, Web Inspector or Dragonfly, because they decode decimal/
 
 = How can I filter other parts of my site? =
 
-* If the content supports WordPress filters, register the `eae_encode_emails()` function to it: `add_filter($tag, 'eae_encode_emails');`.
-* If the content is a PHP string, run it through the `eae_encode_emails()` function: `$text = eae_encode_emails($text);`.
-* If you want to encode a single email address, use the `eae_encode_str()` function: `<?php echo eae_encode_str('name@domain.com'); ?>`
+* If the content supports WordPress filters, register the `eae_encode_emails()` function to it: `add_filter( $tag, 'eae_encode_emails' );`.
+* If the content is a PHP string, run it through the `eae_encode_emails()` function: `$text = eae_encode_emails( $text );`.
+* If you want to encode a single email address, use the `eae_encode_str()` function: `<?php echo eae_encode_str( 'name@domain.com' ); ?>`
 
 This plugin doesn't encode the entire output for performance reasons, it encodes only the content of the following WordPress filters `the_content`, `the_excerpt`, `widget_text`, `comment_text`, `comment_excerpt`.
 
 = How can I use WP's built-in `antispambot()` function instead? =
 
-You specify any valid callback function with the `eae_method` filter to apply to found email addresses: `add_filter('eae_method', function() { return 'antispambot'; });`
+You specify any valid callback function with the `eae_method` filter to apply to found email addresses: `add_filter( 'eae_method', function() { return 'antispambot'; } );`
 
 = How can I change the regular expression pattern? =
 
-You can override [the pattern](http://fightingforalostcause.net/misc/2006/compare-email-regex.php "Comparing E-mail Address Validating Regular Expressions") with the `eae_regexp` filter: `add_filter('eae_regexp', function() { return '/^pattern$/'; });`
+You can override [the pattern](http://fightingforalostcause.net/misc/2006/compare-email-regex.php "Comparing E-mail Address Validating Regular Expressions") with the `eae_regexp` filter: `add_filter( 'eae_regexp', function() { return '/^pattern$/'; } );`
 
 = How can I change the priorty of the default filters? =
 
-The default filter priorty is `1000` and you can adjust it by defining the `EAE_FILTER_PRIORITY` constant: `define('EAE_FILTER_PRIORITY', 99999);`. The constant has to be defined before this plugin is loaded, e.g. in your `wp-config.php` or in Must-use plugin (a.k.a. mu-plugin).
+The default filter priorty is `1000` and you can adjust it by defining the `EAE_FILTER_PRIORITY` constant: `define( 'EAE_FILTER_PRIORITY', 99999 );`. The constant has to be defined before this plugin is loaded, e.g. in your `wp-config.php` or in Must-use plugin (a.k.a. mu-plugin).
 
 = How can I disable the @-sign check? =
 
-Like this: `add_filter('eae_at_sign_check', '__return_false');`
+Like this: `add_filter( 'eae_at_sign_check', '__return_false' );`
 
 
 == Changelog ==
