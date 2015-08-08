@@ -3,7 +3,7 @@ Contributors: tillkruess
 Donate link: http://till.kruss.me/donations/
 Tags: antispam, anti spam, spam, email, e-mail, mail, spider, crawler, harvester, robots, spambot, block, obfuscate, obfuscation, encode, encoder, encoding, encrypt, encryption, protect, protection
 Requires at least: 2.0
-Tested up to: 4.2
+Tested up to: 4.3
 Stable tag: 1.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -29,30 +29,15 @@ For detailed installation instructions, please read the [standard installation p
 
 = What does this plugin do? =
 
-This plugin hooks into filters like `the_content`, `comment_text`, `widget_text` and a few others and checks if the text contains any @-signs.
-If an @-sign is found, a regular expression looks for plain text email addresses.
-Found email addresses are replaced
-
-
-with the return value of `eae_encode_str()` (changeable), which obfuscates the email addresses to protect it from being read by email-harvesting robots.
-
-
-= Why is not using antispambot()? =
-
-This function is slightly faster than WP's built-in `antispambot()` and uses additional hexadecimal entities.
-
-
-performs a quick (disableable) search for an @-sign is performed.
-
-
-
-(additional filters can be added)
-
-
+This plugin hooks into the WordPress filters like `the_content`, `widget_text` and others (additional filters can be added). On each filter a quick (disableable) search for an @-sign is performed. If an @-sign is found, a (overridable) regular expression looks for plain text email addresses. Found email addresses are replaced with the return value of `eae_encode_str()` (changeable), which obfuscates the email addresses to protect it from being read by email-harvesting robots. This function is slightly faster than WP's built-in `antispambot()` and uses additional hexadecimal entities.
 
 = How can I make sure the plugin works? =
 
-You cannot use Firebug, Web Inspector or Dragonfly, because they decode decimal/hexadecimal entities into plain text by default. To make sure email addresses are encoded, right-/secondary-click the page, click "View Source", "View Page Source" or "Source" and search for any plain text email addresses.
+You cannot use Firebug, Web Inspector or Dragonfly, because they decode decimal/hexadecimal entities into plain text. To make sure email addresses are encoded, right-/secondary-click the page, click "View Source", "View Page Source" or "Source" and search for any plain text email addresses. In Firefox, be sure to test with "View Source" not "View Selection Source".
+
+= How can I use WP's built-in `antispambot()` function instead? =
+
+You specify any valid callback function with the `eae_method` filter to apply to found email addresses: `add_filter('eae_method', function() { return 'antispambot'; });`
 
 = How can I filter other parts of my site? =
 
@@ -60,15 +45,11 @@ You cannot use Firebug, Web Inspector or Dragonfly, because they decode decimal/
 * If the content is a PHP string, run it through the `eae_encode_emails()` function: `$text = eae_encode_emails( $text );`.
 * If you want to encode a single email address, use the `eae_encode_str()` function: `<?php echo eae_encode_str( 'name@domain.com' ); ?>`
 
-This plugin doesn't encode the entire output for performance reasons, it encodes only the content of the following WordPress filters `the_content`, `the_excerpt`, `widget_text`, `comment_text`, `comment_excerpt`.
-
-= How can I use WP's built-in `antispambot()` function instead? =
-
-You specify any valid callback function with the `eae_method` filter to apply to found email addresses: `add_filter( 'eae_method', function() { return 'antispambot'; } );`
+This plugin doesn't encode the entire website for performance reasons, it encodes only the content of the following WordPress filters `the_content`, `the_excerpt`, `widget_text`, `comment_text`, `comment_excerpt`.
 
 = How can I change the regular expression pattern? =
 
-You can override [the pattern](http://fightingforalostcause.net/misc/2006/compare-email-regex.php "Comparing E-mail Address Validating Regular Expressions") with the `eae_regexp` filter: `add_filter( 'eae_regexp', function() { return '/^pattern$/'; } );`
+You can override [the pattern](http://fightingforalostcause.net/misc/2006/compare-email-regex.php "Comparing E-mail Address Validating Regular Expressions") with the `eae_regexp` filter: `add_filter( 'eae_regexp', function () { return '/^pattern$/'; } );`
 
 = How can I change the priorty of the default filters? =
 
